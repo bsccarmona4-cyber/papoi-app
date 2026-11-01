@@ -1,0 +1,7 @@
+{
+  "name": "papoi",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
