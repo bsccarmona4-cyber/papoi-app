@@ -31,6 +31,12 @@ import {
   warningSharp,
   bookmarkOutline,
   bookmarkSharp,
+  barbellOutline,
+  barbellSharp,
+  fitnessOutline,
+  fitnessSharp,
+  statsChartOutline,
+  statsChartSharp,
 } from 'ionicons/icons';
 
 @Component({
@@ -63,6 +69,9 @@ export class AppComponent {
     { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
     { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
     { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
+    { title: 'Rutinas', url: '/rutinas', icon: 'barbell' },
+    { title: 'Ejercicios', url: '/ejercicios', icon: 'fitness' },
+    { title: 'Progreso', url: '/progreso', icon: 'stats-chart' },
   ];
   protected readonly labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor() {
@@ -81,6 +90,12 @@ export class AppComponent {
       warningSharp,
       bookmarkOutline,
       bookmarkSharp,
+      barbellOutline,
+      barbellSharp,
+      fitnessOutline,
+      fitnessSharp,
+      statsChartOutline,
+      statsChartSharp,
     });
   }
 }
