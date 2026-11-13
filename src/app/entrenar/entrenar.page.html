@@ -30,18 +30,21 @@
   <h2 class="seccion">Elegí un ejercicio</h2>
   <ion-list>
     @for (ejercicio of ejercicios; track ejercicio.id) {
-      <ion-item button (click)="entreno.elegir(ejercicio)">
-        <ion-label>
-          <h2>{{ ejercicio.name }}</h2>
-          <p>{{ entreno.unidad(ejercicio.unit) }}</p>
-        </ion-label>
-      </ion-item>
+    <ion-item button (click)="entreno.elegir(ejercicio)">
+           <ion-thumbnail slot="start">
+             <img [src]="entreno.imagenDe(ejercicio)" [alt]="ejercicio.name" loading="lazy" decoding="async" />
+           </ion-thumbnail>
+           <ion-label>
+             <h2>{{ ejercicio.name }}</h2>
+             <p>{{ ejercicio.musculos }} · {{ ejercicio.equipo }}</p>
+           </ion-label>
+         </ion-item>
     }
   </ion-list>
 
   @if (entreno.series().length > 0) {
     <div class="guardar">
-      <ion-button expand="block" [disabled]="entreno.guardando()" (click)="entreno.guardar()">
+      <ion-button expand="block" [disabled]="entreno.guardando()" (click)="guardar()">
         Guardar entrenamiento
       </ion-button>
       <p>{{ entreno.mensaje() }}</p>
@@ -56,6 +59,14 @@
         <strong>{{ ejercicio.name }}</strong>
         <ion-button fill="clear" size="small" (click)="entreno.cerrar()">✕</ion-button>
       </div>
+
+      <img
+              class="panel-img"
+              [src]="entreno.imagenDe(ejercicio)"
+              [alt]="ejercicio.name"
+              loading="lazy"
+              decoding="async"
+            />
 
       @if (ejercicio.unit === 'm') {
         <div class="carrera">

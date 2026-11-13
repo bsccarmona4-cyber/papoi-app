@@ -1,13 +1,28 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>progreso</ion-title>
+    <ion-title>Progreso</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">progreso</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="total-card">
+    <p class="total-label">Puntos esta semana</p>
+    <h1 class="total-numero puntos">{{ totalSemana() }}</h1>
+  </div>
+
+  @if (sesiones().length === 0) {
+    <p class="vacio">Todavía no guardaste ningún entrenamiento.</p>
+  } @else {
+    <h2 class="seccion">Últimos entrenamientos</h2>
+    <ion-list>
+      @for (sesion of sesiones(); track sesion.id) {
+        <ion-item>
+          <ion-label>
+            <h2>{{ fechaLegible(sesion.fecha) }}</h2>
+            <p>{{ sesion.puntos }} puntos</p>
+          </ion-label>
+        </ion-item>
+      }
+    </ion-list>
+  }
 </ion-content>

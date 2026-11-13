@@ -203,10 +203,10 @@ No cambia el funcionamiento: el generador de páginas sigue creando standalone p
 2. ✅ Tema visual (violeta pastel, Inter, oscuro fijo)
 3. ✅ Pantalla de registro (local, por esfuerzo, sin base de datos)
 4. ⬜ Supabase: schema, auth, perfiles
-5. ⬜ Guardar sesiones en la nube
+5. ✅ Guardar en la nube y ver el historial en Progreso
 6. ⬜ Duelos: crear con código, unirse, marcador
 7. ✅ Tabs (Entrenar y Progreso)
-8. ⬜ Progreso: historial y puntos por semana
+8. ✅ Progreso: historial y puntos de la semana
 9. 🔶 GPS para correr (funciona en navegador), falta build nativo
 10. ⬜ Build Android con Capacitor
 
@@ -468,6 +468,25 @@ oficial de podómetro en Capacitor.
 
 **Estado:** funciona en el navegador (geolocalización web). En el celular necesita
 permisos en el `AndroidManifest`, que se agregan al crear el proyecto Android.
+
+### 12.6 · Flujo guardar → Progreso
+
+```ts
+async guardar(): Promise<void> {
+  const guardado = await this.entreno.guardar();
+
+  if (guardado) {
+    await this.router.navigate(['/tabs/progreso']);
+  }
+}
+```
+
+El servicio devuelve `true` o `false`, nunca navega: guardar y navegar son
+responsabilidades distintas. La pantalla decide qué hacer con el resultado.
+
+**Progreso** consulta `sesiones` ordenadas por fecha y calcula los puntos de la semana
+con un `computed` (últimos 7 días). Se recarga en `ionViewWillEnter`, el hook de Ionic
+que corre cada vez que se entra a la pestaña, no solo la primera vez.
 
 ## 13. Cómo mantener esta bitácora
 

@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   IonButton,
   IonContent,
@@ -8,6 +9,7 @@ import {
   IonLabel,
   IonList,
   IonRange,
+  IonThumbnail,
   IonTitle,
   IonToolbar,
 } from '@ionic/angular';
@@ -27,6 +29,7 @@ import { EntrenamientoService } from './entrenamiento.service';
     IonLabel,
     IonList,
     IonRange,
+    IonThumbnail,
     IonTitle,
     IonToolbar,
   ],
@@ -34,8 +37,17 @@ import { EntrenamientoService } from './entrenamiento.service';
 export class EntrenarPage {
   protected readonly entreno = inject(EntrenamientoService);
   protected readonly ejercicios = EXERCISES;
+  private readonly router = inject(Router);
 
   constructor() {
     void this.entreno.iniciar();
+  }
+
+  async guardar(): Promise<void> {
+    const guardado = await this.entreno.guardar();
+
+    if (guardado) {
+      await this.router.navigate(['/tabs/progreso']);
+    }
   }
 }

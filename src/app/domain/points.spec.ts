@@ -1,8 +1,16 @@
 import { EXERCISES, scoreDay, scoreSet } from './points';
 
-const sentadilla = EXERCISES[0];
-const dominadas = EXERCISES[6];
-const plancha = EXERCISES[9];
+const buscar = (id: string) => {
+  const encontrado = EXERCISES.find((e) => e.id === id);
+  if (!encontrado) {
+    throw new Error(`No existe el ejercicio ${id}`);
+  }
+  return encontrado;
+};
+
+const sentadilla = buscar('squat');
+const dominadas = buscar('pullup');
+const plancha = buscar('plank');
 
 describe('puntos', () => {
   it('10 sentadillas normales valen 10', () => {

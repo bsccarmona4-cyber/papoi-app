@@ -213,7 +213,7 @@ export class EntrenamientoService {
     this.series.update((actuales) => actuales.filter((_, i) => i !== indice));
   }
 
-  async guardar(): Promise<void> {
+  async guardar(): Promise<boolean> {
     const filas = this.series().map((serie) => ({
       ejercicio_id: serie.exercise.id,
       unidad: serie.exercise.unit,
@@ -224,7 +224,7 @@ export class EntrenamientoService {
     }));
 
     if (filas.length === 0) {
-      return;
+      return false;
     }
 
     this.guardando.set(true);
@@ -240,7 +240,7 @@ export class EntrenamientoService {
       console.error('Error guardando la sesión', error);
       this.guardando.set(false);
       this.mensaje.set('No se pudo guardar');
-      return;
+      return false;
     }
 
     const { error: errorSeries } = await supabase
@@ -252,12 +252,17 @@ export class EntrenamientoService {
     if (errorSeries) {
       console.error('Error guardando las series', errorSeries);
       this.mensaje.set('No se pudo guardar');
-      return;
+      return false;
     }
 
     this.series.set([]);
     this.mensaje.set('Guardado ✓');
+    return true;
   }
+
+  imagenDe(ejercicio: Exercise): string {
+      return `https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/${ejercicio.dbId}/0.jpg`;
+    }
 
   unidad(unit: Exercise['unit']): string {
     if (unit === 'rep') {
