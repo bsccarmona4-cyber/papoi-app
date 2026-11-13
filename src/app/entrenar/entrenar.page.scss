@@ -1,0 +1,127 @@
+.total-card {
+  margin: 16px;
+  padding: 24px 20px;
+  border-radius: 20px;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(167, 139, 250, 0.22), rgba(125, 211, 252, 0.08));
+  border: 1px solid rgba(167, 139, 250, 0.3);
+}
+
+.total-label,
+.seccion {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.total-numero {
+  margin: 6px 0 0;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--ion-color-primary);
+}
+
+.seccion {
+  margin: 24px 0 8px;
+  padding-left: 20px;
+}
+
+.panel {
+  padding: 12px 16px 16px;
+  background: var(--ion-background-color);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.panel-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 8px 0;
+}
+
+.stepper {
+  padding: 8px 0 0;
+  text-align: center;
+}
+
+.stepper-valor {
+  display: block;
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.esfuerzos {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.esfuerzos ion-button {
+  flex: 1;
+  margin: 0;
+}
+
+.guardar {
+  padding: 16px;
+  text-align: center;
+}
+
+.guardar p {
+  margin: 8px 0 0;
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.guardar {
+  padding: 16px;
+  text-align: center;
+}
+
+.guardar p {
+  margin: 8px 0 0;
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.carrera-aviso {
+  margin: 10px 0 0;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.carrera {
+  padding: 12px 0;
+  text-align: center;
+}
+
+.carrera-metros {
+  margin: 0;
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.carrera-linea {
+  margin: 6px 0 16px;
+  font-size: 15px;
+  opacity: 0.75;
+}
+
+.carrera-esfuerzo {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: var(--ion-color-tertiary);
+}

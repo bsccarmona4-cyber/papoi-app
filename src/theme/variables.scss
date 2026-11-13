@@ -1,2 +1,38 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
+:root {
+  /* Violeta pastel: puntos y acentos */
+    --ion-color-primary: #a78bfa;
+    --ion-color-primary-rgb: 167, 139, 250;
+    --ion-color-primary-contrast: #1a1633;
+    --ion-color-primary-contrast-rgb: 26, 22, 51;
+    --ion-color-primary-shade: #937ae0;
+    --ion-color-primary-tint: #b09afb;
+
+    /* Celeste pastel: victorias y rachas */
+    --ion-color-tertiary: #7dd3fc;
+    --ion-color-tertiary-rgb: 125, 211, 252;
+    --ion-color-tertiary-contrast: #0b2540;
+    --ion-color-tertiary-contrast-rgb: 11, 37, 64;
+    --ion-color-tertiary-shade: #6ebade;
+    --ion-color-tertiary-tint: #8bdcfd;
+
+  --ion-font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Tarjetas con esquinas suaves */
+ion-card {
+  border-radius: 20px;
+}
+
+/* Números de puntos: alineados, no bailan al sumar */
+.puntos {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.ion-palette-dark {
+  --ion-background-color: #100e1a;
+  --ion-item-background: #191527;
+  --ion-tab-bar-background: #141122;
+}

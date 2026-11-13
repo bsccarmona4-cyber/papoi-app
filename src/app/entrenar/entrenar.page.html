@@ -1,0 +1,111 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Entrenar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="total-card">
+    <p class="total-label">Puntos de hoy</p>
+    <h1 class="total-numero puntos">{{ entreno.total() }}</h1>
+  </div>
+
+  @if (entreno.series().length > 0) {
+    <h2 class="seccion">Series de hoy</h2>
+    <ion-list>
+      @for (serie of entreno.series(); track $index) {
+        <ion-item>
+          <ion-label>
+            <h2>{{ serie.exercise.name }}</h2>
+            <p>{{ entreno.resumen(serie) }}</p>
+          </ion-label>
+          <ion-button slot="end" fill="clear" color="danger" (click)="entreno.borrar($index)">
+            Borrar
+          </ion-button>
+        </ion-item>
+      }
+    </ion-list>
+  }
+
+  <h2 class="seccion">Elegí un ejercicio</h2>
+  <ion-list>
+    @for (ejercicio of ejercicios; track ejercicio.id) {
+      <ion-item button (click)="entreno.elegir(ejercicio)">
+        <ion-label>
+          <h2>{{ ejercicio.name }}</h2>
+          <p>{{ entreno.unidad(ejercicio.unit) }}</p>
+        </ion-label>
+      </ion-item>
+    }
+  </ion-list>
+
+  @if (entreno.series().length > 0) {
+    <div class="guardar">
+      <ion-button expand="block" [disabled]="entreno.guardando()" (click)="entreno.guardar()">
+        Guardar entrenamiento
+      </ion-button>
+      <p>{{ entreno.mensaje() }}</p>
+    </div>
+  }
+</ion-content>
+
+@if (entreno.seleccionado(); as ejercicio) {
+  <ion-footer>
+    <div class="panel">
+      <div class="panel-top">
+        <strong>{{ ejercicio.name }}</strong>
+        <ion-button fill="clear" size="small" (click)="entreno.cerrar()">✕</ion-button>
+      </div>
+
+      @if (ejercicio.unit === 'm') {
+        <div class="carrera">
+          <p class="carrera-metros">{{ entreno.metrosRedondos() }} m</p>
+          <p class="carrera-linea">{{ entreno.tiempo() }} · {{ entreno.ritmoTexto() }}</p>
+
+          @if (entreno.grabando()) {
+            <ion-button expand="block" color="danger" (click)="entreno.terminarCarrera()">
+              Terminar
+            </ion-button>
+          } @else {
+            <ion-button expand="block" (click)="entreno.empezarCarrera()">
+              Empezar a correr
+            </ion-button>
+          }
+
+          @if (entreno.mensaje()) {
+            <p class="carrera-aviso">{{ entreno.mensaje() }}</p>
+          }
+        </div>
+      } @else {
+        <div class="stepper">
+          <span class="stepper-valor puntos">{{ entreno.cantidad() }}</span>
+
+          <ion-range
+            aria-label="Cantidad"
+            [min]="entreno.escala().min"
+            [max]="entreno.escala().max"
+            [step]="entreno.escala().step"
+            [value]="entreno.cantidad()"
+            [pin]="true"
+            (ionChange)="entreno.setCantidad($event)"
+          ></ion-range>
+        </div>
+
+        <div class="esfuerzos">
+          @for (nivel of entreno.niveles; track nivel) {
+            <ion-button
+              [fill]="entreno.esfuerzo() === nivel ? 'solid' : 'outline'"
+              (click)="entreno.esforzar(nivel)"
+            >
+              {{ entreno.etiquetas[nivel] }}
+            </ion-button>
+          }
+        </div>
+
+        <ion-button expand="block" (click)="entreno.agregar()">
+          Agregar · {{ entreno.puntosDeLaSerie() }} pts
+        </ion-button>
+      }
+    </div>
+  </ion-footer>
+}

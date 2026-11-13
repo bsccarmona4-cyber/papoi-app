@@ -1,29 +1,33 @@
 import type { Routes } from '@angular/router';
+import { TabsPage } from './tabs/tabs.page';
 
 export const routes: Routes = [
   {
+    path: 'tabs',
+    component: TabsPage,
+    children: [
+      {
+        path: 'entrenar',
+        loadComponent: () => import('./entrenar/entrenar.page').then((m) => m.EntrenarPage),
+      },
+      {
+        path: 'progreso',
+        loadComponent: () => import('./progreso/progreso.page').then((m) => m.ProgresoPage),
+      },
+      {
+        path: '',
+        redirectTo: 'entrenar',
+        pathMatch: 'full',
+      },
+    ],
+  },
+  {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: 'tabs/entrenar',
     pathMatch: 'full',
   },
   {
-    path: 'folder/:folder',
-    loadComponent: () => import('./folder/folder.page').then((m) => m.FolderPage),
-  },
-  {
-    path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
-  },
-  {
-    path: 'rutinas',
-    loadComponent: () => import('./rutinas/rutinas.page').then((m) => m.RutinasPage),
-  },
-  {
-    path: 'ejercicios',
-    loadComponent: () => import('./ejercicios/ejercicios.page').then((m) => m.EjerciciosPage),
-  },
-  {
-    path: 'progreso',
-    loadComponent: () => import('./progreso/progreso.page').then((m) => m.ProgresoPage),
+    path: '**',
+    redirectTo: 'tabs/entrenar',
   },
 ];
